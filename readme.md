@@ -49,3 +49,23 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+## Dependencies
+
+- PHP >= 5.6.4
+- OpenSSL PHP Extension
+- PDO PHP Extension
+- Mbstring PHP Extension
+- Tokenizer PHP Extension
+- XML PHP Extension
+
+## Getting up and running
+
+Check out this if you have any questions: https://laravel.com/docs/5.4/installation
+- pull the code
+- cd into the directory and run composer install
+    - (or download composer then do that)
+- rename the .example.env file to .env
+- put in your db creds in the .env
+- run php artisan migrate
+- if things blow up @ me
