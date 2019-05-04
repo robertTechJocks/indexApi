@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::prefix('v1')->group(function () {
+    Route::get('players', "PlayerController@index");
+    Route::get('players/{id}', "PlayerController@show");
+
+    Route::get('equipment', "EquipmentController@index");
+    Route::get('equipment/{id}', "EquipmentController@show");
+});
