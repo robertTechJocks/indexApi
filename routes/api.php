@@ -23,4 +23,7 @@ Route::prefix('v1')->group(function () {
 
     Route::get('equipment', "EquipmentController@index");
     Route::get('equipment/{id}', "EquipmentController@show");
+
+    Route::get('teams', "TeamController@index");
+    Route::get('teams/{id}', "TeamController@show");
 });
