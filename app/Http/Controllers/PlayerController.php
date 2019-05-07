@@ -24,11 +24,16 @@ class PlayerController extends Controller
 
     public function show($id)
     {
+        $this->currentSeasons = Season::where("current", 1)->get()->pluck("id")->toArray();
+
         $player = Player::with(['seasons' => function ($query) {
-            $query->with("team")->with("league")->where('season_id', $this->currentSeason->id);
+            $query->with("team")->with("league")->whereIn('season_id', $this->currentSeasons);
         }])
         ->with(['equipment' => function ($query) {
-            $query->with("details")->where('season_id', $this->currentSeason->id);
+            $query->with("details")->whereIn('season_id', $this->currentSeasons);
+        }])
+        ->with(['training' => function ($query) {
+            $query->with("details");
         }])
         ->where("id", $id)
         ->first();
@@ -114,5 +119,21 @@ class PlayerController extends Controller
         $player->update();
 
         return response()->json(["success" => "Training purchased successfully"]);
+    }
+
+    public function showEquipment($id)
+    {
+
+        $equipmentLog = PlayerEquipment::with("details")->where("player_id", $id)->get();
+
+        return response()->json($equipmentLog);
+    }
+
+    public function showTraining($id)
+    {
+
+        $trainingLog = PlayerTraining::with("details")->where("player_id", $id)->get();
+
+        return response()->json($trainingLog);
     }
 }

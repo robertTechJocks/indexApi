@@ -26,4 +26,9 @@ class Player extends Model
         return $this->hasMany('App\PlayerEquipment');
     }
 
+    public function training()
+    {
+        return $this->hasMany('App\PlayerTraining');
+    }
+
 }

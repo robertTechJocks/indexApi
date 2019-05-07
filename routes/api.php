@@ -29,4 +29,7 @@ Route::prefix('v1')->group(function () {
 
     Route::patch('players/{id}/equipment', "PlayerController@purchaseEquipment");
     Route::patch('players/{id}/training', "PlayerController@purchaseTraining");
+
+    Route::get('players/{id}/equipment', "PlayerController@showEquipment");
+    Route::get('players/{id}/training', "PlayerController@showTraining");
 });
