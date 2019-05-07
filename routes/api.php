@@ -26,4 +26,7 @@ Route::prefix('v1')->group(function () {
 
     Route::get('teams', "TeamController@index");
     Route::get('teams/{id}', "TeamController@show");
+
+    Route::patch('players/{id}/equipment', "PlayerController@purchaseEquipment");
+    Route::patch('players/{id}/training', "PlayerController@purchaseTraining");
 });

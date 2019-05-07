@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePlayerTrainingTable extends Migration
+class AddRestrictedTpeToPlayers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreatePlayerTrainingTable extends Migration
      */
     public function up()
     {
-        Schema::create('player_training', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('player_id');
-            $table->integer('training_id');
-            $table->timestamps();
+        Schema::table('players', function (Blueprint $table) {
+            $table->json('restricted_tpe')->nullable();
         });
     }
 
@@ -28,6 +25,8 @@ class CreatePlayerTrainingTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('player_training');
+        Schema::table('players', function (Blueprint $table) {
+            $table->dropColumn('restricted_tpe');
+        });
     }
 }

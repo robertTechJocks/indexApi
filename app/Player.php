@@ -11,6 +11,11 @@ class Player extends Model
         return json_decode($value);
     }
 
+    public function getRestrictedTpeAttribute($value)
+    {
+        return json_decode($value);
+    }
+
     public function seasons()
     {
         return $this->hasMany('App\PlayerSeason');
