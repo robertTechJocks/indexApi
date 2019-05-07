@@ -50,9 +50,17 @@ class PlayerController extends Controller
 
         $currentSeason = $this->getCurrentSeason($equipment->league_id);
 
-        if(PlayerEquipment::where("equipment_id", $request->input("equipment_id"))->where("season_id", $currentSeason->id)->where("player_id", $id)->first())
+        if(PlayerEquipment::with("details")->where("equipment_id", $request->input("equipment_id"))->where("season_id", $currentSeason->id)->where("player_id", $id)->first())
         {
             return response()->json(["error" => "Equipment already purchased this season"]);
+        }
+        $currentEquipment = PlayerEquipment::with("details")->where("season_id", $currentSeason->id)->where("player_id", $id)->get();
+        foreach ($currentEquipment as $key => $currentEquipmentPiece) {
+            if($currentEquipmentPiece->details->equipment_type == $equipment->equipment_type)
+            {
+                $type = $equipment->equipment_type;
+                return response()->json(["error" => "Equipment type ($type) purchased this season"]);
+            }
         }
 
         if(($player->bank_balance - $equipment->price) < 0)

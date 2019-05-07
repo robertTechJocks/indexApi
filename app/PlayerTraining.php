@@ -10,6 +10,6 @@ class PlayerTraining extends Model
 
     public function details()
     {
-        return $this->hasOne("App\Training", "id");
+        return $this->hasOne("App\Training", "id", "training_id");
     }
 }
