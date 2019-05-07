@@ -80,6 +80,8 @@ class PlayerController extends Controller
 
         $player->restricted_tpe = json_encode($playerRestrictedTPE);
         $player->update();
+
+        return response()->json(["success" => "Equipment purchased successfully"]);
     }
 
     public function purchaseTraining(Request $request, $id)
@@ -110,5 +112,7 @@ class PlayerController extends Controller
         $player->free_tpe += $training->tpe_gain;
 
         $player->update();
+
+        return response()->json(["success" => "Training purchased successfully"]);
     }
 }
