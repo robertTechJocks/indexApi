@@ -144,4 +144,49 @@ class PlayerController extends Controller
 
         return response()->json($trainingLog);
     }
+
+    public function getAllPlayersByUserID($id)
+    {
+        $players = Player::with(['seasons' => function ($query) {
+            $query->with("team")->with("league");
+        }])
+        ->where("user_id", $id)
+        ->get();
+        foreach ($players as $key => $player) {
+            $player->team;
+        }
+
+        return response()->json($players);
+    }
+
+    public function getCurrentPlayersByUserID($id)
+    {
+        $players = Player::where("user_id", $id)->get();
+        foreach ($players as $key => $player) {
+            $player->team;
+        }
+
+        return response()->json($players);
+    }
+
+    public function updatePlayer(Request $request, $id)
+    {
+        /*$players = Player::where("user_id", $id)->get();
+        foreach ($players as $key => $player) {
+            $player->team;
+        }
+
+        return response()->json($players);*/
+    }
+
+    public function updatePlayerAttributes(Request $request, $id)
+    {
+        //var_dump($request->all());
+        $player = Player::find($id);
+        $player->sim_stats = json_encode($request->get("sim_stats"));
+        $player->free_tpe = $request->get("free_tpe");
+        $player->save();
+        return response()->json($player->save());
+    }
+
 }

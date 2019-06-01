@@ -31,4 +31,9 @@ class Player extends Model
         return $this->hasMany('App\PlayerTraining');
     }
 
+    public function checkTPE()
+    {
+        
+    }
+
 }

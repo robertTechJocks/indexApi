@@ -32,4 +32,10 @@ Route::prefix('v1')->group(function () {
 
     Route::get('players/{id}/equipment', "PlayerController@showEquipment");
     Route::get('players/{id}/training', "PlayerController@showTraining");
+
+    Route::patch('players/{id}', "PlayerController@updatePlayer");
+    Route::post('players/{id}/attributes', "PlayerController@updatePlayerAttributes");
+
+    Route::get('users/{id}/players', "PlayerController@getAllPlayersByUserID");
+    Route::get('users/{id}/players/current', "PlayerController@getCurrentPlayersByUserID");
 });
