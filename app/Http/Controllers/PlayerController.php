@@ -38,6 +38,7 @@ class PlayerController extends Controller
         ->where("id", $id)
         ->first();
         $player->teams;
+        $player->currentCappedTPE;
 
         return response()->json($player);
     }
@@ -164,6 +165,7 @@ class PlayerController extends Controller
         $players = Player::where("user_id", $id)->get();
         foreach ($players as $key => $player) {
             $player->team;
+            $player->currentCappedTPE;
         }
 
         return response()->json($players);

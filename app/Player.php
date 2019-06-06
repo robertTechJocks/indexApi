@@ -36,4 +36,9 @@ class Player extends Model
         
     }
 
+    public function currentCappedTPE()
+    {
+        return $this->hasMany('App\PlayerCappedTpe');
+    }
+
 }
